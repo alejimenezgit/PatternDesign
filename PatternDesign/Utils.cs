@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PatternDesign
+﻿namespace PatternDesign
 {
     public class Utils
     {
@@ -15,7 +9,7 @@ namespace PatternDesign
         public Utils()
         {
             writeConsole = new WriteConsole();
-            anotherThings = new AnotherThings();
+            anotherThings = new AnotherThings(); // Ejemplo de otras cosas
         }
 
         public class WriteConsole
