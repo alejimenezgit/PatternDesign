@@ -1,0 +1,234 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "host": "api.tradein.brokip.com",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/api/v1/opportunity": {
+      "get": {
+        "tags": [
+          "Opportunity"
+        ],
+        "summary": "Obtiene un objeto por su Id.",
+        "description": "API v1 - Aquí una descripción mas larga si fuera necesario. Obtiene un objeto por su Id.",
+        "operationId": "Oportunidad",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "description": "Id (GUID) del objeto.",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized. No se ha indicado o es incorrecto el Token de acceso."
+          },
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ApiResponse[Opportunity]"
+            }
+          },
+          "404": {
+            "description": "NotFound. No se ha encontrado el objeto solicitado."
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "read",
+              "write"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/v1/values": {
+      "get": {
+        "tags": [
+          "Values"
+        ],
+        "description": "API v1",
+        "operationId": "Values_Get",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "read",
+              "write"
+            ]
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Values"
+        ],
+        "description": "API v1",
+        "operationId": "Values_Put",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "format": "int32"
+          },
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "read",
+              "write"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Values"
+        ],
+        "description": "API v1",
+        "operationId": "Values_Post",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "read",
+              "write"
+            ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Values"
+        ],
+        "description": "API v1",
+        "operationId": "Values_Delete",
+        "parameters": [
+          {
+            "type": "integer",
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "read",
+              "write"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Opportunity": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "example": "00000000-0000-0000-0000-000000000000"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "ApiResponse[Opportunity]": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/Opportunity"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "oauth2": {
+      "type": "oauth2",
+      "description": "OAuth2",
+      "flow": "application",
+      "authorizationUrl": "/token",
+      "tokenUrl": "/token",
+      "scopes": {
+        "read": "Read access to protected resources",
+        "write": "Write access to protected resources"
+      }
+    }
+  }
+}

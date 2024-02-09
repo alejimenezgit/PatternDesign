@@ -15,3 +15,5 @@ new FactoryMethod().Main();
 
 writeConsole.WriteInfo("End of execute the project PatternDesign.", true);
 
+
+

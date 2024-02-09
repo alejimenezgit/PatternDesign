@@ -12,6 +12,42 @@ namespace PatternDesign
         public void Main()
         {
             new Client().Main();
+
+            var a = GetElibilityToken(new HttpClient()).Result;
+        }
+
+        private static async Task<string> GetElibilityToken(HttpClient client)
+        {
+
+            var apiClient = new Microsoft.Learning.Brokip.TradeIn.API.Client(new HttpClient());
+            string baseAddress = apiClient.BaseUrl + "/token";
+            string grant_type = "client_credentials";
+            string client_id = "internal";
+            string client_secret = "shhhhhhhhhhhhhhItsSecret";
+
+            var form = new Dictionary<string, string>
+            {
+                {"grant_type", grant_type},
+                {"client_id", client_id},
+                {"client_secret", client_secret},
+                {"scope", "read write"},
+            };
+
+            try
+            {
+                client.Timeout = TimeSpan.FromSeconds(20);
+                HttpResponseMessage tokenResponse2 = await client.PostAsync(baseAddress, new FormUrlEncodedContent(form));
+                var a = "";
+            }
+            catch (Exception ex)
+            {
+                var a = ex.Message;
+            }
+
+            HttpResponseMessage tokenResponse = await client.PostAsync(baseAddress, new FormUrlEncodedContent(form));
+            var jsonContent = await tokenResponse.Content.ReadAsStringAsync();
+
+            return null;
         }
     }
 
